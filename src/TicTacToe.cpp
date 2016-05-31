@@ -8,7 +8,17 @@ char player = 'X';
 bool isAvailable(int row, int column)
 {
 	//TODO: Implement this code so that it tells the user whether or not he can play in the selected cell
-	return true;
+
+	if(board[row-1][column-1]!='x' || board[row-1][column-1]!='0' )
+    {
+        return true;
+    }
+    else
+    {
+     return false;
+    }
+
+
 }
 
 //Give initial values to the board matrix
@@ -48,9 +58,84 @@ bool gameover()
 {
 	//TODO: Implement this method,verify if any player has won the match of it's being a tie.
 	//Return true if the game is over. Print message informing the user about what just happened.
-	if(false){ // change this with a real condition
-		cout << "You loose" << endl;
-	}
+	 //horizontal
+     char foundPlayer = board[0][0];
+     for(int i =0 ; i < 3; i++){
+             for(int j = 0 ; j < 3 ; j++){
+                     if(board[i][j] == '_'){
+                          break; break;
+                     }
+                     if(foundPlayer != board[i][j]){
+                          break; break;
+
+                     }
+                     foundPlayer = board[i][j];
+                     if(j == 2){
+                          printf("Ha ganado %c", foundPlayer);
+                          return true;
+                     }
+              }
+
+     }
+
+
+     //vertical
+     foundPlayer = board[0][0];
+     for(int i =0 ; i < 3; i++){
+             for(int j = 0 ; j < 3 ; j++){
+                     if(board[j][i] == '_'){
+                          break; break;
+                     }
+                     if(foundPlayer != board[j][i]){
+                          break; break;
+
+                     }
+                     foundPlayer = board[j][i];
+                     if(j == 2){
+                          printf("Ha ganado %c", foundPlayer);
+                          return true;
+                     }
+              }
+
+     }
+
+
+     //diagonal de izquierda a derecha
+     foundPlayer = board[0][0];
+     for(int i = 0 ; i < 3; i++){
+           if(board[i][i] == '_'){
+                 break;
+             }
+             if(foundPlayer != board[i][i]){
+                   break;
+
+             }
+             foundPlayer = board[i][i];
+             if(i == 2){
+                    printf("Ha ganado %c", foundPlayer);
+                    return true;
+             }
+
+     }
+
+     //diagonal de derecha a izquierda
+     foundPlayer = board[0][2];
+     for(int i = 2 ; i >= 0; i--){
+           if(board[2-i][i] == '_'){
+                 break;
+             }
+             if(foundPlayer != board[2-i][i]){
+                   break;
+
+             }
+             foundPlayer = board[2-i][i];
+             if(i == 0){
+                    printf("Ha ganado %c", foundPlayer);
+                    return true;
+             }
+
+     }
+
 	return false;
 }
 
